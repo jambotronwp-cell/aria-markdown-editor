@@ -15,10 +15,7 @@ Markdown editor for Angular, built on [Angular Aria](https://angular.dev/guide/a
 
 ## Install
 
-From the Gitea npm registry of jambotron.com:
-
 ```bash
-npm config set @jambotron:registry https://gitea.jambotron.com/api/packages/jambotron_gang/npm/
 npm install @jambotron/aria-markdown-editor @jambotron/aria-components marked katex
 ```
 
