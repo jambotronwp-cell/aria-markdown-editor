@@ -1,0 +1,39 @@
+{
+  "name": "@jambotron/aria-markdown-editor",
+  "version": "0.2.2",
+  "peerDependencies": {
+    "@angular/common": "^22.2.0",
+    "@angular/core": "^22.2.0",
+    "@angular/forms": "^22.2.0",
+    "@angular/aria": "^22.2.0",
+    "marked": ">=16.0.0",
+    "@jambotron/aria-components": ">=0.1.0 <1.0.0"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  },
+  "sideEffects": false,
+  "description": "Markdown editor for Angular on Angular Aria: source and preview side by side, toolbar, tabs on phones, KaTeX formulas, image paste/drop, hotkeys, forms (ControlValueAccessor + Signal Forms); icons from @jambotron/aria-components",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://gitea.jambotron.com/jambotron_gang/jambotron-aria-markdown-editor.git"
+  },
+  "exports": {
+    "./styles/*": {
+      "sass": "./styles/*.scss"
+    }
+  },
+  "homepage": "https://aria-markdown-editor-demo.jambocheck.com",
+  "author": "Jambotron (https://jambotron.com)",
+  "keywords": [
+    "angular",
+    "angular-aria",
+    "accessibility",
+    "a11y",
+    "markdown",
+    "markdown-editor",
+    "katex",
+    "editor"
+  ]
+}

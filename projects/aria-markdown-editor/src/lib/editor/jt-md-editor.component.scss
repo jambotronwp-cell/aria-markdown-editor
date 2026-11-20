@@ -1,0 +1,181 @@
+// Tokens: --jt-* of the app (styles/aria-markdown-editor.scss has defaults); --jt-md-editor-height — the height.
+:host {
+  display: block;
+  min-width: 0;
+  color: var(--jt-text, inherit);
+  --_height: var(--jt-md-editor-height, 420px);
+}
+
+.jt-md-editor__split {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: var(--jt-space-3, 12px);
+  height: var(--_height);
+}
+
+.jt-md-editor__source {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  border: 1px solid var(--jt-field-border, rgba(10, 16, 48, 0.28));
+  border-radius: var(--jt-radius-md, 10px);
+  background: var(--jt-field-bg, rgba(255, 255, 255, 0.55));
+  overflow: hidden;
+  transition: border-color var(--jt-duration-fast, 120ms) var(--jt-easing, ease), box-shadow var(--jt-duration-fast, 120ms) var(--jt-easing, ease);
+
+  &:focus-within {
+    border-color: var(--jt-accent, #14c8e6);
+    box-shadow: var(--jt-focus-ring, 0 0 0 3px rgba(20, 200, 230, 0.45));
+  }
+}
+
+:host(.jt-md-editor--dragging) .jt-md-editor__source {
+  border-style: dashed;
+  border-color: var(--jt-accent, #14c8e6);
+}
+
+.jt-md-editor__toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--jt-space-1, 4px);
+  padding: var(--jt-space-1, 4px);
+  border-bottom: 1px solid var(--jt-divider, rgba(10, 16, 48, 0.12));
+}
+
+.jt-md-editor__group {
+  display: flex;
+  gap: 2px;
+
+  & + & {
+    padding-left: var(--jt-space-1, 4px);
+    border-left: 1px solid var(--jt-divider, rgba(10, 16, 48, 0.12));
+  }
+}
+
+.jt-md-editor__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--jt-radius-sm, 6px);
+  background: none;
+  color: var(--jt-text-muted, inherit);
+  cursor: pointer;
+
+  &:hover:not([aria-disabled='true']) {
+    background: var(--jt-md-hover-bg, rgba(20, 200, 230, 0.12));
+    color: var(--jt-text, inherit);
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: var(--jt-focus-ring, 0 0 0 3px rgba(20, 200, 230, 0.45));
+  }
+
+  &[aria-disabled='true'] {
+    color: var(--jt-text-disabled, rgba(20, 26, 51, 0.45));
+    cursor: default;
+  }
+}
+
+.jt-md-editor__status {
+  margin-left: auto;
+  padding: 0 var(--jt-space-2, 8px);
+  color: var(--jt-text-muted, inherit);
+  font-size: 0.85em;
+}
+
+.jt-md-editor__textarea {
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+  box-sizing: border-box;
+  padding: var(--jt-space-3, 12px);
+  border: 0;
+  outline: none;
+  resize: none;
+  background: transparent;
+  color: inherit;
+  font-family: var(--jt-font-mono, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace);
+  font-size: 0.92em;
+  line-height: 1.55;
+  tab-size: 2;
+
+  &:disabled {
+    color: var(--jt-text-disabled, rgba(20, 26, 51, 0.45));
+  }
+}
+
+.jt-md-editor__error {
+  margin: 0;
+  padding: var(--jt-space-1, 4px) var(--jt-space-3, 12px);
+  color: var(--jt-danger-text, #8a1414);
+  font-size: 0.85em;
+}
+
+.jt-md-editor__preview {
+  display: block;
+  min-height: 0;
+  margin: 0;
+  padding: var(--jt-space-3, 12px);
+  border: 1px solid var(--jt-divider, rgba(10, 16, 48, 0.12));
+  border-radius: var(--jt-radius-md, 10px);
+  overflow: auto;
+}
+
+.jt-md-editor__preview--empty {
+  color: var(--jt-text-muted, inherit);
+  font-style: italic;
+}
+
+// Tabs (narrow screens)
+.jt-md-editor__tablist {
+  display: flex;
+  gap: var(--jt-space-1, 4px);
+  margin: 0 0 var(--jt-space-2, 8px);
+  padding: 0;
+  list-style: none;
+  border-bottom: 1px solid var(--jt-divider, rgba(10, 16, 48, 0.12));
+}
+
+.jt-md-editor__tab {
+  padding: var(--jt-space-2, 8px) var(--jt-space-3, 12px);
+  border-bottom: 2px solid transparent;
+  color: var(--jt-text-muted, inherit);
+  cursor: pointer;
+
+  &[aria-selected='true'] {
+    border-bottom-color: var(--jt-accent, #14c8e6);
+    color: var(--jt-text, inherit);
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: var(--jt-focus-ring, 0 0 0 3px rgba(20, 200, 230, 0.45));
+  }
+}
+
+.jt-md-editor__panel {
+  height: var(--_height);
+
+  // Aria marks the hidden tab panel inert but leaves it in the layout
+  &[inert] {
+    display: none;
+  }
+
+  > .jt-md-editor__source,
+  > .jt-md-editor__preview {
+    height: 100%;
+    box-sizing: border-box;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .jt-md-editor__source {
+    transition: none;
+  }
+}

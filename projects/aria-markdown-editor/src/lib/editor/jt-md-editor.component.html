@@ -1,0 +1,65 @@
+@if (tabbed()) {
+  <div ngTabs class="jt-md-editor__tabs">
+    <ul ngTabList class="jt-md-editor__tablist" [(selectedTab)]="tab">
+      <li ngTab class="jt-md-editor__tab" value="write">{{ labels().write }}</li>
+      <li ngTab class="jt-md-editor__tab" value="preview">{{ labels().preview }}</li>
+    </ul>
+    <div ngTabPanel class="jt-md-editor__panel" value="write">
+      <ng-template ngTabContent>
+        <ng-container [ngTemplateOutlet]="source" />
+      </ng-template>
+    </div>
+    <div ngTabPanel class="jt-md-editor__panel" value="preview">
+      <ng-template ngTabContent>
+        <ng-container [ngTemplateOutlet]="preview" />
+      </ng-template>
+    </div>
+  </div>
+} @else {
+  <div class="jt-md-editor__split">
+    <ng-container [ngTemplateOutlet]="source" />
+    <ng-container [ngTemplateOutlet]="preview" />
+  </div>
+}
+
+<ng-template #source>
+  <div class="jt-md-editor__source">
+    @if (!readonly()) {
+      <div ngToolbar class="jt-md-editor__toolbar" [wrap]="true" [disabled]="isDisabled()" [attr.aria-label]="labels().toolbar">
+        @for (group of groups(); track $index) {
+          <div ngToolbarWidgetGroup class="jt-md-editor__group" role="group">
+            @for (tool of group; track tool) {
+              <button ngToolbarWidget type="button" class="jt-md-editor__button" [attr.data-tool]="tool"
+                      [attr.aria-label]="labels()[tool]" [title]="title(tool)"
+                      (mousedown)="$event.preventDefault()" (click)="run(tool)">
+                <jt-icon [name]="icon(tool)" [size]="18" />
+              </button>
+            }
+          </div>
+        }
+        @if (uploads()) {
+          <span class="jt-md-editor__status" role="status">{{ labels().uploading }}…</span>
+        }
+      </div>
+    }
+    <textarea #textarea class="jt-md-editor__textarea" spellcheck="true"
+              [value]="value()" [placeholder]="placeholder()" [disabled]="isDisabled()" [readOnly]="readonly()"
+              [attr.aria-label]="label() || labels().editor"
+              (input)="onInput($event)" (blur)="onBlur()" (keydown)="onKeydown($event)" (paste)="onPaste($event)"
+              (dragover)="onDragOver($event)" (dragleave)="onDragLeave()" (drop)="onDrop($event)"></textarea>
+    @if (error()) {
+      <p class="jt-md-editor__error" role="alert">{{ error() }}</p>
+    }
+    @if (uploadImage()) {
+      <input #file type="file" accept="image/*" multiple hidden (change)="onFileChosen($event)">
+    }
+  </div>
+</ng-template>
+
+<ng-template #preview>
+  @if (value().trim()) {
+    <jt-md-preview class="jt-md-editor__preview" [markdown]="value()" />
+  } @else {
+    <p class="jt-md-editor__preview jt-md-editor__preview--empty">{{ labels().emptyPreview }}</p>
+  }
+</ng-template>

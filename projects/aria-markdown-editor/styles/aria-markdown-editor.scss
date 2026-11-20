@@ -1,0 +1,37 @@
+// @jambotron/aria-markdown-editor — theme. Include once in the app's global styles:
+//   @use '@jambotron/aria-markdown-editor/styles/aria-markdown-editor';
+// Tokens are defaults on :where(:root) (zero specificity): any --jt-* the app sets wins (same tokens as @jambotron/aria-grid).
+// Formulas: add KaTeX CSS too — @use 'katex/dist/katex.min.css' (or angular.json styles).
+
+:where(:root) {
+  --jt-accent: #14c8e6;
+  --jt-accent-text: #074b5a;
+  --jt-on-accent: #050816;
+  --jt-danger: #ef4444;
+  --jt-danger-text: #8a1414;
+  --jt-text: #141a33;
+  --jt-text-muted: #39425f;
+  --jt-text-disabled: rgba(20, 26, 51, 0.45);
+  --jt-divider: rgba(10, 16, 48, 0.12);
+  --jt-field-bg: rgba(255, 255, 255, 0.55);
+  --jt-field-border: rgba(10, 16, 48, 0.28);
+  --jt-focus-ring: 0 0 0 3px rgba(20, 200, 230, 0.45);
+  --jt-glow-accent: 0 0 10px rgba(20, 200, 230, 0.35);
+  --jt-popup-bg: #eef2f7f2;
+  --jt-popup-border: rgba(10, 16, 48, 0.12);
+  --jt-shadow-lg: 0 16px 48px rgba(10, 16, 48, 0.2);
+  --jt-radius-sm: 6px;
+  --jt-radius-md: 10px;
+  --jt-radius-pill: 999px;
+  --jt-space-1: 4px;
+  --jt-space-2: 8px;
+  --jt-space-3: 12px;
+  --jt-space-4: 16px;
+  --jt-duration-fast: 150ms;
+  --jt-duration-base: 250ms;
+  --jt-duration-slow: 400ms;
+  --jt-easing: cubic-bezier(0.2, 0, 0, 1);
+  --jt-md-code-bg: rgba(10, 16, 48, 0.07);
+  --jt-md-hover-bg: rgba(20, 200, 230, 0.12);
+  --jt-md-editor-height: 420px;
+}
